@@ -13,16 +13,17 @@ class BuildConfigKotlinSourceSet(private val name: String) : Named, Serializable
 
     private var _fields: MutableMap<String, BuildConfigField> = mutableMapOf()
 
-    val fields: List<BuildConfigField> get() = _fields.values.toList()
+    internal val fields: List<BuildConfigField> get() = _fields.values.toList()
 
-    private fun checkName(name: String) {
-        if (_fields.containsKey(name)) {
-            throw IllegalArgumentException("Name: $name is already defined")
-        }
+    fun className(name: String) {
+        className = name
+    }
+
+    fun packageName(name: String) {
+        packageName = name
     }
 
     fun buildConfig(name: String, value: String) {
-        checkName(name)
         _fields[name] = BuildConfigField(name, value)
     }
 
@@ -78,6 +79,16 @@ class BuildConfigKotlinSourceSet(private val name: String) : Named, Serializable
 
     fun buildConfigChar(configuration: BuildConfigFieldBuilder<Char>.() -> Unit) {
         val builder = BuildConfigFieldBuilder<Char>()
+        builder.configuration()
+        _fields[builder.name] = BuildConfigField(builder.name, builder.value)
+    }
+
+    fun buildConfig(name: String, value: Boolean) {
+        _fields[name] = BuildConfigField(name, value)
+    }
+
+    fun buildConfigBoolean(configuration: BuildConfigFieldBuilder<Boolean>.() -> Unit) {
+        val builder = BuildConfigFieldBuilder<Boolean>()
         builder.configuration()
         _fields[builder.name] = BuildConfigField(builder.name, builder.value)
     }

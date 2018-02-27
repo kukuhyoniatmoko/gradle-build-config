@@ -15,12 +15,27 @@ buildscript {
 }
 
 group = "com.github.kukuhyoniatmoko"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 plugins {
     `kotlin-dsl` version "0.15.4"
     id("java-gradle-plugin")
     id("com.gradle.plugin-publish") version "0.9.10"
+}
+
+pluginBundle {
+    website = "https://github.com/kukuhyoniatmoko/gradle-build-config"
+    vcsUrl = "https://github.com/kukuhyoniatmoko/gradle-build-config"
+
+    plugins {
+        create("buildConfigKotlin") {
+            id = "com.github.kukuhyoniatmoko.buildconfigkotlin"
+            displayName = "Gradle Build Config for JVM"
+            description = "Generate constants with kotlin's object"
+            tags = setOf("gradle", "kotlin", "jvm", "build config")
+            version = "1.0.0"
+        }
+    }
 }
 
 val kotlinVersion: String by extra

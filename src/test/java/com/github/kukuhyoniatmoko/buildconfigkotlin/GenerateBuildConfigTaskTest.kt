@@ -11,14 +11,14 @@ import java.io.FileOutputStream
 
 class GenerateBuildConfigTaskTest {
 
+    @Rule
     @JvmField
-    val testProjectDir = File("build/test")
+    val testProjectDir = TemporaryFolder()
     private lateinit var buildFile: File
 
     @Before
     fun setup() {
-        testProjectDir.mkdirs()
-        buildFile = testProjectDir.resolve("build.gradle")
+        buildFile = testProjectDir.newFile("build.gradle")
         val buildGradle = """
             buildscript {
                 repositories {
@@ -35,22 +35,16 @@ class GenerateBuildConfigTaskTest {
             }
 
             buildConfigKotlin {
-                sourceSets.create("main") {
-
-                    setPackageName("com.github.kukuhyoniatmoko.test")
+                main {
+                    packageName = "com.github.kukuhyoniatmoko.test"
 
                     buildConfig("stringValue", "test")
                     buildConfig("intValue", 1)
                     buildConfig("longValue", 1L)
                     buildConfig("floatValue", 1f)
                     buildConfig("doubleValue", 1.0)
-                    buildConfig("charValue", '1' as char)
-                }
-            }
-
-            tasks.all {
-                doLast {
-                    println(name)
+                    buildConfig("charValue", '1')
+                    buildConfig("booleanValue", true)
                 }
             }
         """.trimIndent()
@@ -65,8 +59,7 @@ class GenerateBuildConfigTaskTest {
     fun generateTest() {
         val result = GradleRunner.create()
                 .withPluginClasspath()
-                .withProjectDir(testProjectDir)
-                .forwardStdOutput(System.out.bufferedWriter())
+                .withProjectDir(testProjectDir.root)
                 .withArguments("clean", "build")
                 .build()
 
