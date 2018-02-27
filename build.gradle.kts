@@ -15,7 +15,7 @@ buildscript {
 }
 
 group = "com.github.kukuhyoniatmoko"
-version = "1.0.0"
+version = "1.0.1"
 
 plugins {
     `kotlin-dsl` version "0.15.4"
@@ -33,7 +33,7 @@ pluginBundle {
             displayName = "Gradle Build Config for JVM"
             description = "Generate constants with kotlin's object"
             tags = setOf("gradle", "kotlin", "jvm", "build config")
-            version = "1.0.0"
+            version = "1.0.1"
         }
     }
 }
