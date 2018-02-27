@@ -1,6 +1,8 @@
 # gradle-build-config
 Generate build config constants as kotlin's object
 
+[![CircleCI](https://circleci.com/gh/kukuhyoniatmoko/gradle-build-config/tree/master.svg?style=svg)](https://circleci.com/gh/kukuhyoniatmoko/gradle-build-config/tree/master)
+
 build.gradle.kts:
 ```kotlin
 plugins {
