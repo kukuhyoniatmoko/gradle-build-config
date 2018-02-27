@@ -3,26 +3,32 @@ package com.github.kukuhyoniatmoko.buildconfigkotlin
 import org.gradle.api.Named
 import java.io.Serializable
 
+/** Configuration of the generated object */
 class BuildConfigKotlinSourceSet(private val name: String) : Named, Serializable {
 
     override fun getName(): String = name
 
+    /** Simple Name of the generated object */
     var className: String = "BuildConfig"
 
+    /** Package Name of the generated object */
     var packageName: String = ""
 
     private var _fields: MutableMap<String, BuildConfigField> = mutableMapOf()
 
     internal val fields: List<BuildConfigField> get() = _fields.values.toList()
 
+    /** Mutate [className] */
     fun className(name: String) {
         className = name
     }
 
+    /** Mutate [packageName] */
     fun packageName(name: String) {
         packageName = name
     }
 
+    /** Add a field with type [String] */
     fun buildConfig(name: String, value: String) {
         _fields[name] = BuildConfigField(name, value)
     }
@@ -33,6 +39,7 @@ class BuildConfigKotlinSourceSet(private val name: String) : Named, Serializable
         _fields[builder.name] = BuildConfigField(builder.name, builder.value)
     }
 
+    /** Add a field with type [Int] */
     fun buildConfig(name: String, value: Int) {
         _fields[name] = BuildConfigField(name, value)
     }
@@ -43,6 +50,7 @@ class BuildConfigKotlinSourceSet(private val name: String) : Named, Serializable
         _fields[builder.name] = BuildConfigField(builder.name, builder.value)
     }
 
+    /** Add a field with type [Float] */
     fun buildConfig(name: String, value: Float) {
         _fields[name] = BuildConfigField(name, value)
     }
@@ -53,6 +61,7 @@ class BuildConfigKotlinSourceSet(private val name: String) : Named, Serializable
         _fields[builder.name] = BuildConfigField(builder.name, builder.value)
     }
 
+    /** Add a field with type [Long] */
     fun buildConfig(name: String, value: Long) {
         _fields[name] = BuildConfigField(name, value)
     }
@@ -63,6 +72,7 @@ class BuildConfigKotlinSourceSet(private val name: String) : Named, Serializable
         _fields[builder.name] = BuildConfigField(builder.name, builder.value)
     }
 
+    /** Add a field with type [Double] */
     fun buildConfig(name: String, value: Double) {
         _fields[name] = BuildConfigField(name, value)
     }
@@ -73,6 +83,7 @@ class BuildConfigKotlinSourceSet(private val name: String) : Named, Serializable
         _fields[builder.name] = BuildConfigField(builder.name, builder.value)
     }
 
+    /** Add a field with type [Char] */
     fun buildConfig(name: String, value: Char) {
         _fields[name] = BuildConfigField(name, value)
     }
@@ -83,6 +94,7 @@ class BuildConfigKotlinSourceSet(private val name: String) : Named, Serializable
         _fields[builder.name] = BuildConfigField(builder.name, builder.value)
     }
 
+    /** Add a field with type [Boolean] */
     fun buildConfig(name: String, value: Boolean) {
         _fields[name] = BuildConfigField(name, value)
     }
