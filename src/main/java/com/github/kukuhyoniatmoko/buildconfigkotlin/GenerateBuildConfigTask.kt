@@ -8,10 +8,12 @@ import java.io.File
 
 open class GenerateBuildConfigTask : AbstractTask() {
 
-    @Input
+    @get:Input
+    @field:Input
     lateinit var sourceSet: BuildConfigKotlinSourceSet
 
-    @OutputDirectory
+    @get:OutputDirectory
+    @field:OutputDirectory
     lateinit var outputDir: File
 
     @TaskAction
