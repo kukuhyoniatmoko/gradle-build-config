@@ -13,11 +13,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 class BuildConfigKotlinPlugin : Plugin<Project> {
 
-    private val taskOptions = mapOf(Task.TASK_TYPE to GenerateBuildConfigTask::class.java)
+    private val taskOptions = mapOf(
+        Task.TASK_TYPE to GenerateBuildConfigTask::class.java,
+        Task.TASK_GROUP to TASK_GROUP
+    )
 
     override fun apply(target: Project) {
         target.extensions.create(
-            "buildConfigKotlin",
+            EXTENSION_NAME,
             BuildConfigKotlinExtension::class.java,
             target
         )
@@ -68,17 +71,23 @@ class BuildConfigKotlinPlugin : Plugin<Project> {
     private fun Project.createGenerateBuildConfigTask(
         set: BuildConfigKotlinSourceSet
     ): GenerateBuildConfigTask {
-        val taskName = createTaskName("generate", set.name, "BuildConfigKotlin")
+        val taskName = createTaskName("generate", set.name, TASK_GROUP)
         val task = task(taskOptions, taskName) as GenerateBuildConfigTask
 
         task.sourceSet = set
         task.outputDir = buildDir.toPath()
-            .resolve("generated/buildconfig/src")
+            .resolve(GENERATE_DIR)
             .resolve(set.name)
             .toFile()
 
         task.description = "Generate ${set.packageName}.${set.className} for configuration: ${set.name}"
 
         return task
+    }
+
+    companion object {
+        private const val GENERATE_DIR = "generated/source/buildconfigkotlin/src"
+        private const val EXTENSION_NAME = "buildConfigKotlin"
+        private const val TASK_GROUP = "BuildConfigKotlin"
     }
 }
