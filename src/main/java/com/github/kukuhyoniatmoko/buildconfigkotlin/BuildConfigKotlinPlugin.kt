@@ -61,9 +61,8 @@ class BuildConfigKotlinPlugin : Plugin<Project> {
 
     private fun createTaskName(prefix: String, name: String, suffix: String): String {
         val isMain = name == "main"
-        val suffixIt: String = if (isMain) "" else prefix
-        val nameIt: String = if (isMain) name else name.capitalize()
-        return "$suffixIt$nameIt$suffix"
+        val nameIt: String = if (isMain) "" else name.capitalize()
+        return "$prefix$nameIt$suffix"
     }
 
     private fun Project.createGenerateBuildConfigTask(
