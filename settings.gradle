@@ -1,2 +1,5 @@
 rootProject.name = 'gradle-build-config'
+include ':plugin'
+findProject(':plugin')?.name = 'gradle-build-config'
+include 'consumer'
 

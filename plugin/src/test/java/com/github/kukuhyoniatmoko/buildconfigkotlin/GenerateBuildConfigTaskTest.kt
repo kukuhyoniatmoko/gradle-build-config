@@ -58,10 +58,10 @@ class GenerateBuildConfigTaskTest {
     @Test
     fun generateTest() {
         val result = GradleRunner.create()
-                .withPluginClasspath()
-                .withProjectDir(testProjectDir.root)
-                .withArguments("clean", "build")
-                .build()
+            .withPluginClasspath()
+            .withProjectDir(testProjectDir.root)
+            .withArguments("clean", "build")
+            .build()
 
         result.tasks.filter { it is GenerateBuildConfigTask }.forEach {
             assert(it.outcome == TaskOutcome.SUCCESS)

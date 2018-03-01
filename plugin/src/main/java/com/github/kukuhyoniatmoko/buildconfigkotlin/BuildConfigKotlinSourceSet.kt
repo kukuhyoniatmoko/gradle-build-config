@@ -107,10 +107,10 @@ class BuildConfigKotlinSourceSet(private val name: String) : Named, Serializable
 
     override fun toString(): String {
         return "BuildConfigKotlinSourceSet(" +
-                "name = $name," +
-                "className = $className," +
-                "packageName = $packageName," +
-                "fields = $fields" +
-                ")"
+            "name = $name," +
+            "className = $className," +
+            "packageName = $packageName," +
+            "fields = $fields" +
+            ")"
     }
 }

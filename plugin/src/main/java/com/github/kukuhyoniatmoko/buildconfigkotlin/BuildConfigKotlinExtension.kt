@@ -11,7 +11,7 @@ open class BuildConfigKotlinExtension(project: Project) : Configurable<NamedDoma
 
     /** Generated objects configuration */
     val sourceSets: NamedDomainObjectContainer<BuildConfigKotlinSourceSet> =
-            project.container(BuildConfigKotlinSourceSet::class.java, ::BuildConfigKotlinSourceSet)
+        project.container(BuildConfigKotlinSourceSet::class.java, ::BuildConfigKotlinSourceSet)
 
     /**
      * Creates a new [BuildConfigKotlinSourceSet] with the given [name],

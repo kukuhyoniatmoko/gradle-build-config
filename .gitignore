@@ -1,4 +1,7 @@
+.gradle
 build
+out
+bin
 .idea/workspace.xml
 .idea/libraries
 .idea/misc.xml

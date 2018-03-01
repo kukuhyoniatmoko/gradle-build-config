@@ -1,6 +1,10 @@
 package com.github.kukuhyoniatmoko.buildconfigkotlin
 
-import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeSpec
 
 object BuildConfigSpecFactory {
 
@@ -18,9 +22,9 @@ object BuildConfigSpecFactory {
                 else -> "%L"
             }
             val spec = PropertySpec.builder(it.name, type)
-                    .addModifiers(KModifier.CONST)
-                    .initializer(initFormat, it.value)
-                    .build()
+                .addModifiers(KModifier.CONST)
+                .initializer(initFormat, it.value)
+                .build()
             builder.addProperty(spec)
         }
 
