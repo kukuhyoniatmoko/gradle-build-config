@@ -15,10 +15,10 @@ buildscript {
 }
 
 group = "com.github.kukuhyoniatmoko"
-version = "1.0.1"
+version = "1.0.2"
 
 plugins {
-    `kotlin-dsl` version "0.15.4"
+    `kotlin-dsl`
     id("java-gradle-plugin")
     id("com.gradle.plugin-publish") version "0.9.10"
 }
@@ -30,10 +30,10 @@ pluginBundle {
     plugins {
         create("buildConfigKotlin") {
             id = "com.github.kukuhyoniatmoko.buildconfigkotlin"
-            displayName = "Gradle Build Config for JVM"
+            displayName = "Gradle Build Config for Kotlin"
             description = "Generate constants with kotlin's object"
-            tags = setOf("gradle", "kotlin", "jvm", "build config")
-            version = "1.0.1"
+            tags = setOf("gradle", "kotlin", "build config")
+            version = "1.0.2"
         }
     }
 }
