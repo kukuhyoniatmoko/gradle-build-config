@@ -1,7 +1,17 @@
+.gradle
 build
+out
+bin
+*.iml
 .idea/workspace.xml
 .idea/libraries
 .idea/misc.xml
 .idea/modules.xml
 .idea/modules
 .idea/vcs.xml
+*/.idea/workspace.xml
+*/.idea/libraries
+*/.idea/misc.xml
+*/.idea/modules.xml
+*/.idea/modules
+*/.idea/vcs.xml

@@ -1,11 +1,12 @@
 version: 2
 jobs:
-  build:
+  test:
+    working_directory: ~/src
     docker:
-      - image: gebish/ci:v5
+      - image: circleci/openjdk:8-jdk-node-browsers
     environment:
+      TERM: dumb
       GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
-      GRADLE_USER_HOME: .gradle-home
     branches:
       only:
         - master
@@ -14,6 +15,32 @@ jobs:
       - checkout
       - run:
           command: |
-            ./gradlew --stacktrace --no-daemon check
+            cd consumer && ./gradlew --stacktrace --no-daemon check && cd ..
       - store_artifacts:
           path: build/reports
+  publish:
+    working_directory: ~/src
+    docker:
+      - image: circleci/openjdk:8-jdk-node-browsers
+    environment:
+      TERM: dumb
+      GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
+    branches:
+      only:
+        - master
+    steps:
+      - checkout
+      - run:
+          command: |
+            cd plugin && ./gradlew publishPlugins -Dgradle.publish.key=$publishKey -Dgradle.publish.secret=$publishSecret && cd ..
+workflows:
+  version: 2
+  build:
+    jobs:
+      - test
+      - publish:
+        requires:
+          - test
+        filters:
+          branches:
+            only: master

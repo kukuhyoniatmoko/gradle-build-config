@@ -7,11 +7,23 @@ build.gradle.kts:
 ```groovy
 plugins {
   kotlin("jvm")
-  id("com.github.kukuhyoniatmoko.buildconfigkotlin") version "1.0.1"
+  id("com.github.kukuhyoniatmoko.buildconfigkotlin") version "1.0.4"
+}
+
+java {
+    sourceSets.create("debug")
 }
 
 buildConfigKotlin {
   sourceSet("main") {
+    buildConfig(name = "stringConstant", value = "value")
+    buildConfig(name = "intConstant", value = 1)
+    buildConfig(name = "longConstant", value = 1L)
+    buildConfig(name = "floatConstant", value = 1f)
+    buildConfig(name = "doubleConstant", value = 1.0)
+  }
+  
+  sourceSet("debug") {
     buildConfig(name = "stringConstant", value = "value")
     buildConfig(name = "intConstant", value = 1)
     buildConfig(name = "longConstant", value = 1L)

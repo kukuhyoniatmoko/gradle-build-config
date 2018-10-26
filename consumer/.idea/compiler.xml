@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="buildconfigkotlin_main" target="1.8" />
+      <module name="buildconfigkotlin_test" target="1.8" />
+      <module name="consumer_debug" target="1.8" />
+      <module name="consumer_main" target="1.8" />
+      <module name="consumer_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
