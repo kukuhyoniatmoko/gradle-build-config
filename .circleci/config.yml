@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   test:
     working_directory: ~/src
@@ -14,8 +14,8 @@ jobs:
     steps:
       - checkout
       - run:
-          command: |
-            cd consumer && ./gradlew --stacktrace --no-daemon check && cd ..
+          name: Testing
+          command: cd consumer && ./gradlew --stacktrace --no-daemon check && cd ..
       - store_artifacts:
           path: build/reports
   publish:
@@ -31,11 +31,12 @@ jobs:
     steps:
       - checkout
       - run:
-          command: |
-            cd plugin && ./gradlew publishPlugins -Dgradle.publish.key=$publishKey -Dgradle.publish.secret=$publishSecret && cd ..
+          name: Publish
+          command: cd plugin && ./gradlew publishPlugins -Dgradle.publish.key=$publishKey -Dgradle.publish.secret=$publishSecret && cd ..
+
 workflows:
   version: 2
-  build:
+  test-publish:
     jobs:
       - test
       - publish:
