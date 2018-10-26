@@ -9,7 +9,7 @@ buildscript {
 plugins {
     `kotlin-dsl`
     id("java-gradle-plugin")
-    id("com.gradle.plugin-publish") version "0.9.10"
+    id("com.gradle.plugin-publish") version "0.10.0"
 }
 
 group = "com.github.kukuhyoniatmoko"
@@ -30,7 +30,7 @@ pluginBundle {
     }
 }
 
-val kotlinVersion = "1.2.30"
+val kotlinVersion = "1.2.71"
 
 repositories {
     jcenter()
@@ -39,7 +39,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
     implementation(kotlin("gradle-plugin", kotlinVersion))
-    implementation("com.squareup:kotlinpoet:0.7.0")
+    implementation("com.squareup:kotlinpoet:1.0.0-RC2")
     implementation(gradleApi())
 
     testImplementation("junit:junit:4.12")

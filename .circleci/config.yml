@@ -1,11 +1,12 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/src
     docker:
-      - image: gebish/ci:v5
+      - image: circleci/openjdk:8-jdk-node-browsers
     environment:
+      TERM: dumb
       GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
-      GRADLE_USER_HOME: .gradle-home
     branches:
       only:
         - master
@@ -14,6 +15,6 @@ jobs:
       - checkout
       - run:
           command: |
-            ./gradlew --stacktrace --no-daemon check
+            cd consumer && ./gradlew --stacktrace --no-daemon check
       - store_artifacts:
           path: build/reports

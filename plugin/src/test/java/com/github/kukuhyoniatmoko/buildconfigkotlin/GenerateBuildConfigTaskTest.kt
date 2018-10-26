@@ -23,19 +23,24 @@ class GenerateBuildConfigTaskTest {
             buildscript {
                 repositories {
                     jcenter()
+                    gradlePluginPortal()
                 }
                 dependencies {
-                    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.21")
+                    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.71")
                 }
             }
 
             plugins {
                 id("kotlin")
-                id("com.github.kukuhyoniatmoko.buildconfigkotlin")
+                id("com.github.kukuhyoniatmoko.buildconfigkotlin") version "1.0.3"
+            }
+
+            repositories {
+                gradlePluginPortal()
             }
 
             buildConfigKotlin {
-                main {
+                sourceSet("main", Action {
                     packageName = "com.github.kukuhyoniatmoko.test"
 
                     buildConfig("stringValue", "test")
@@ -45,7 +50,7 @@ class GenerateBuildConfigTaskTest {
                     buildConfig("doubleValue", 1.0)
                     buildConfig("charValue", '1')
                     buildConfig("booleanValue", true)
-                }
+                })
             }
         """.trimIndent()
 

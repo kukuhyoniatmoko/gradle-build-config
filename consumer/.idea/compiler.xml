@@ -2,13 +2,11 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="buildconfigkotlin_main" target="1.8" />
+      <module name="buildconfigkotlin_test" target="1.8" />
       <module name="consumer_debug" target="1.8" />
       <module name="consumer_main" target="1.8" />
       <module name="consumer_test" target="1.8" />
-      <module name="gradle-build-config-gradle-build-config_main" target="1.8" />
-      <module name="gradle-build-config-gradle-build-config_test" target="1.8" />
-      <module name="plugin_main" target="1.8" />
-      <module name="plugin_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
