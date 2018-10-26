@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "com.github.kukuhyoniatmoko"
-version = "1.0.3"
+version = "1.0.4"
 
 pluginBundle {
     website = "https://github.com/kukuhyoniatmoko/gradle-build-config"
@@ -25,7 +25,7 @@ pluginBundle {
             displayName = "Gradle Build Config for Kotlin"
             description = "Generate constants with kotlin's object"
             tags = setOf("gradle", "kotlin", "build config")
-            version = "1.0.3"
+            version = "1.0.4"
         }
     }
 }
