@@ -12,7 +12,7 @@ repositories {
 plugins {
     `java-gradle-plugin`
     kotlin("jvm") version "1.2.71"
-    id("com.github.kukuhyoniatmoko.buildconfigkotlin").version("1.0.3")
+    id("com.github.kukuhyoniatmoko.buildconfigkotlin").version("1.0.5")
 }
 
 java {
@@ -20,7 +20,7 @@ java {
 }
 
 buildConfigKotlin {
-    sourceSet("main", Action {
+    sourceSet("main") {
 
         packageName = "consumer"
 
@@ -31,9 +31,9 @@ buildConfigKotlin {
         buildConfig("doubleValue", 1.0)
         buildConfig("charValue", '1')
         buildConfig("booleanValue", true)
-    })
+    }
 
-    sourceSet("debug", Action {
+    sourceSet("debug") {
 
         packageName = "consumer"
 
@@ -44,7 +44,7 @@ buildConfigKotlin {
         buildConfig("doubleValue", 2.0)
         buildConfig("charValue", '2')
         buildConfig("booleanValue", false)
-    })
+    }
 }
 
 dependencies {

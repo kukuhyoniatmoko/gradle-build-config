@@ -21,18 +21,6 @@ open class BuildConfigKotlinExtension(project: Project) : Configurable<NamedDoma
      * container.
      */
     @Throws(InvalidUserDataException::class)
-    fun sourceSet(name: String, configuration: BuildConfigKotlinSourceSet.() -> Unit): BuildConfigKotlinSourceSet {
-        return sourceSets.create(name, configuration)
-    }
-
-    /**
-     * Creates a new [BuildConfigKotlinSourceSet] with the given [name],
-     * adding it to the [sourceSets], then configuring it with the given [configuration].
-     *
-     * @throws [InvalidUserDataException] if an [BuildConfigKotlinSourceSet] with the given name already exists in this
-     * container.
-     */
-    @Throws(InvalidUserDataException::class)
     fun sourceSet(name: String, configuration: Action<BuildConfigKotlinSourceSet>): BuildConfigKotlinSourceSet {
         return sourceSets.create(name, configuration)
     }

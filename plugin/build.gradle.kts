@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "com.github.kukuhyoniatmoko"
-version = "1.0.4"
+version = "1.0.5"
 
 pluginBundle {
     website = "https://github.com/kukuhyoniatmoko/gradle-build-config"
@@ -25,7 +25,7 @@ pluginBundle {
             displayName = "Gradle Build Config for Kotlin"
             description = "Generate constants with kotlin's object"
             tags = setOf("gradle", "kotlin", "build config")
-            version = "1.0.4"
+            version = "1.0.5"
         }
     }
 }
@@ -38,7 +38,8 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
-    implementation(kotlin("gradle-plugin", kotlinVersion))
+    compileOnly(kotlin("gradle-plugin", kotlinVersion))
+
     implementation("com.squareup:kotlinpoet:1.0.0-RC2")
     implementation(gradleApi())
 

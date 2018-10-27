@@ -4,8 +4,8 @@ import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.api.UnknownDomainObjectException
 import org.gradle.api.artifacts.UnknownConfigurationException
+import org.gradle.api.logging.LogLevel
 import org.gradle.api.plugins.JavaPluginConvention
 import org.gradle.api.tasks.SourceSet
 import org.gradle.kotlin.dsl.withType
@@ -29,7 +29,7 @@ class BuildConfigKotlinPlugin : Plugin<Project> {
                 checkConfiguration(set)
                 val sourceSet = extractSourceSet(set)
                 val task = createGenerateBuildConfigTask(set)
-                sourceSet.java.srcDir(task.outputDir)
+                sourceSet?.java?.srcDir(task.outputDir)
                 tasks.withType<KotlinCompile> {
                     dependsOn += task
                 }
@@ -44,13 +44,19 @@ class BuildConfigKotlinPlugin : Plugin<Project> {
             return sourceSets.toList()
         }
 
-    private fun Project.extractSourceSet(set: BuildConfigKotlinSourceSet): SourceSet {
-        return try {
-            convention.getPlugin(JavaPluginConvention::class.java)
-                .sourceSets.getByName(set.name)
-        } catch (e: UnknownDomainObjectException) {
-            throw  GradleException("SourceSet with name: ${set.name} not found.", e)
-        }
+    private fun Project.extractSourceSet(set: BuildConfigKotlinSourceSet): SourceSet? {
+        return convention.findPlugin(JavaPluginConvention::class.java)
+            ?.sourceSets
+            ?.findByName(set.name)
+            .also {
+                if (it == null) {
+                    logger.log(LogLevel.WARN, """
+                        buildConfigKotlin can not find source set with name `${set.name}`!
+                        The generated code should be included into source set manually
+                        Usually its on build/$GENERATE_DIR/${set.name}
+                    """.trimIndent())
+                }
+            }
     }
 
     private fun Project.checkConfiguration(set: BuildConfigKotlinSourceSet) {
