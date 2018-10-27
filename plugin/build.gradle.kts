@@ -38,7 +38,8 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
-    implementation(kotlin("gradle-plugin", kotlinVersion))
+    compileOnly(kotlin("gradle-plugin", kotlinVersion))
+
     implementation("com.squareup:kotlinpoet:1.0.0-RC2")
     implementation(gradleApi())
 
