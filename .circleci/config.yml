@@ -7,10 +7,6 @@ jobs:
     environment:
       TERM: dumb
       GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
-    branches:
-      only:
-        - master
-        - development
     steps:
       - checkout
       - run:
@@ -18,16 +14,13 @@ jobs:
           command: cd consumer && ./gradlew --stacktrace --no-daemon check && cd ..
       - store_artifacts:
           path: build/reports
-  publish:
+  deploy:
     working_directory: ~/src
     docker:
       - image: circleci/openjdk:8-jdk-node-browsers
     environment:
       TERM: dumb
       GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
-    branches:
-      only:
-        - master
     steps:
       - checkout
       - run:
@@ -36,12 +29,14 @@ jobs:
 
 workflows:
   version: 2
-  test-publish:
+  test-deploy:
     jobs:
       - test
-      - publish:
-        requires:
-          - test
-        filters:
-          branches:
-            only: master
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v[0-9]\.[0-9]\.[0-9]((-(alpha|beta|RC)[1-9])|)$/
